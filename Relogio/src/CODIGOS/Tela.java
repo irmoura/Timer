@@ -33,8 +33,12 @@ public class Tela extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jCombo_horas = new javax.swing.JComboBox<>();
-        jLabel_hora_atual = new javax.swing.JLabel();
+        COMBO_HORAS = new javax.swing.JComboBox<>();
+        LABEL_HORA_ATUAL = new javax.swing.JLabel();
+        COMBO_MINUTOS = new javax.swing.JComboBox<>();
+        BTN_INICIAR = new javax.swing.JButton();
+        BTN_PARAR = new javax.swing.JButton();
+        LABEL_TESTE = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -47,33 +51,74 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
-        jCombo_horas.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jCombo_horas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        COMBO_HORAS.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        COMBO_HORAS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
 
-        jLabel_hora_atual.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel_hora_atual.setText("00:00:00");
+        LABEL_HORA_ATUAL.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LABEL_HORA_ATUAL.setText("--:--:--");
 
-        jDesktopPane1.setLayer(jCombo_horas, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel_hora_atual, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        COMBO_MINUTOS.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        COMBO_MINUTOS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+
+        BTN_INICIAR.setText("Iniciar");
+        BTN_INICIAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_INICIARActionPerformed(evt);
+            }
+        });
+
+        BTN_PARAR.setText("Parar");
+        BTN_PARAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_PARARActionPerformed(evt);
+            }
+        });
+
+        LABEL_TESTE.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LABEL_TESTE.setText("--:--:--");
+
+        jDesktopPane1.setLayer(COMBO_HORAS, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(LABEL_HORA_ATUAL, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(COMBO_MINUTOS, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(BTN_INICIAR, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(BTN_PARAR, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(LABEL_TESTE, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCombo_horas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel_hora_atual)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(COMBO_HORAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(COMBO_MINUTOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(BTN_INICIAR)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTN_PARAR))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LABEL_TESTE)
+                            .addComponent(LABEL_HORA_ATUAL))))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(233, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(LABEL_HORA_ATUAL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LABEL_TESTE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCombo_horas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_hora_atual))
+                    .addComponent(COMBO_HORAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(COMBO_MINUTOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_INICIAR)
+                    .addComponent(BTN_PARAR))
                 .addContainerGap())
         );
 
@@ -103,7 +148,54 @@ public class Tela extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         new Thread_HoraAtual().Run();
+        
+        BTN_PARAR.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
+
+    private void BTN_INICIARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_INICIARActionPerformed
+        // TODO add your handling code here:
+        if(!((COMBO_HORAS.getSelectedIndex() == 0) && (COMBO_MINUTOS.getSelectedIndex() == 0))){
+            /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+            BTN_INICIAR.setEnabled(false);
+            COMBO_HORAS.setEnabled(false);
+            COMBO_MINUTOS.setEnabled(false);
+            /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+            BTN_PARAR.setEnabled(true);
+            /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+            Cronometro contagem = new Cronometro(0, 0, 0, Integer.parseInt(""+COMBO_HORAS.getSelectedItem()), Integer.parseInt(""+COMBO_MINUTOS.getSelectedItem()), 0, Cronometro.REGRESSIVA);
+            contagem.cronometro();
+            /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+            Teste.marca_tempo(""+COMBO_HORAS.getSelectedItem()+":"+COMBO_MINUTOS.getSelectedItem()+":00");  
+            LABEL_TESTE.setText("INICIO - "+Teste.horario_do_inicio+" | "+"FIM - "+Teste.horario_do_fim);
+            /*----------------------------------------------------------------*/
+            /*ZERA AS VARIAVEIS QUE MOSTRAM INICIO E FIM DOS HORARIOS*/
+            Teste.horario_do_inicio = "";
+    
+            Teste.ss = 0; 
+            Teste.segundos_totais = 0;
+            Teste.mm = 0;
+            Teste.hh = 0;
+
+            Teste.ss_2 = 0;
+            Teste.mm_2 = 0;
+            Teste.hh_2 = 0;
+
+            Teste.segundos = "";
+            Teste.minutos = "";
+            Teste.horas = "";
+            Teste.cronometro_string = "";
+            Teste.horario_do_fim = "";
+
+            Teste.segundos_finais = "";
+            Teste.minutos_finais = "";
+            Teste.horas_finais = "";
+            /*----------------------------------------------------------------*/
+        }
+    }//GEN-LAST:event_BTN_INICIARActionPerformed
+
+    private void BTN_PARARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PARARActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTN_PARARActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,9 +227,13 @@ public class Tela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jCombo_horas;
+    private javax.swing.JButton BTN_INICIAR;
+    private javax.swing.JButton BTN_PARAR;
+    private javax.swing.JComboBox<String> COMBO_HORAS;
+    private javax.swing.JComboBox<String> COMBO_MINUTOS;
+    private javax.swing.JLabel LABEL_HORA_ATUAL;
+    private javax.swing.JLabel LABEL_TESTE;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel_hora_atual;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -145,8 +241,8 @@ public class Tela extends javax.swing.JFrame {
     public class Thread_HoraAtual extends Thread{
         public void Run(){
             Timer timer = new Timer(0, (ActionEvent e) -> {
-                SimpleDateFormat hora_completa = new SimpleDateFormat("hh:mm:ss:S");
-                jLabel_hora_atual.setText(""+hora_completa.format(new Date()));
+                SimpleDateFormat hora_completa = new SimpleDateFormat("hh:mm:ss");
+                LABEL_HORA_ATUAL.setText("Hora Atual | "+hora_completa.format(new Date()));
             });
 
             timer.start();
