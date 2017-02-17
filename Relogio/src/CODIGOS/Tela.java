@@ -6,8 +6,10 @@
 package CODIGOS;
 
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -15,7 +17,10 @@ import javax.swing.Timer;
  * @author irmoura
  */
 public class Tela extends javax.swing.JFrame {
-
+    
+    Cronometro contagem;
+    public Timer timer2;
+    
     /**
      * Creates new form Tela
      */
@@ -39,6 +44,12 @@ public class Tela extends javax.swing.JFrame {
         BTN_INICIAR = new javax.swing.JButton();
         BTN_PARAR = new javax.swing.JButton();
         LABEL_TESTE = new javax.swing.JLabel();
+        LABEL_TEMPO_DECORRIDO = new javax.swing.JLabel();
+        LABEL_TEMPO_RESTANTE = new javax.swing.JLabel();
+        LABEL_PORCENT_PROGRESSIVA = new javax.swing.JLabel();
+        LABEL_PORCENT_REGRESSIVA = new javax.swing.JLabel();
+        BARRA_PROGRESSIVA = new javax.swing.JProgressBar();
+        BARRA_REGRESSIVA = new javax.swing.JProgressBar();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -77,12 +88,30 @@ public class Tela extends javax.swing.JFrame {
         LABEL_TESTE.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LABEL_TESTE.setText("--:--:--");
 
+        LABEL_TEMPO_DECORRIDO.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LABEL_TEMPO_DECORRIDO.setText("--:--:--");
+
+        LABEL_TEMPO_RESTANTE.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LABEL_TEMPO_RESTANTE.setText("--:--:--");
+
+        LABEL_PORCENT_PROGRESSIVA.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LABEL_PORCENT_PROGRESSIVA.setText("--:--:--");
+
+        LABEL_PORCENT_REGRESSIVA.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LABEL_PORCENT_REGRESSIVA.setText("--:--:--");
+
         jDesktopPane1.setLayer(COMBO_HORAS, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(LABEL_HORA_ATUAL, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(COMBO_MINUTOS, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(BTN_INICIAR, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(BTN_PARAR, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(LABEL_TESTE, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(LABEL_TEMPO_DECORRIDO, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(LABEL_TEMPO_RESTANTE, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(LABEL_PORCENT_PROGRESSIVA, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(LABEL_PORCENT_REGRESSIVA, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(BARRA_PROGRESSIVA, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(BARRA_REGRESSIVA, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -102,18 +131,44 @@ public class Tela extends javax.swing.JFrame {
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LABEL_TEMPO_RESTANTE)
                             .addComponent(LABEL_TESTE)
-                            .addComponent(LABEL_HORA_ATUAL))))
-                .addContainerGap(47, Short.MAX_VALUE))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LABEL_TEMPO_DECORRIDO)
+                                    .addComponent(LABEL_HORA_ATUAL))
+                                .addGap(234, 234, 234)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LABEL_PORCENT_PROGRESSIVA)
+                                    .addComponent(LABEL_PORCENT_REGRESSIVA))
+                                .addGap(196, 196, 196)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BARRA_REGRESSIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BARRA_PROGRESSIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(134, 228, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LABEL_HORA_ATUAL)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(LABEL_HORA_ATUAL)
+                        .addGap(18, 18, 18)
+                        .addComponent(LABEL_TEMPO_DECORRIDO))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LABEL_PORCENT_PROGRESSIVA)
+                            .addComponent(BARRA_PROGRESSIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LABEL_PORCENT_REGRESSIVA)
+                            .addComponent(BARRA_REGRESSIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LABEL_TEMPO_RESTANTE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LABEL_TESTE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(COMBO_HORAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(COMBO_MINUTOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,11 +217,12 @@ public class Tela extends javax.swing.JFrame {
             /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
             BTN_PARAR.setEnabled(true);
             /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
-            Cronometro contagem = new Cronometro(0, 0, 0, Integer.parseInt(""+COMBO_HORAS.getSelectedItem()), Integer.parseInt(""+COMBO_MINUTOS.getSelectedItem()), 0, Cronometro.REGRESSIVA);
+            contagem = new Cronometro(0, 0, 0, Integer.parseInt(""+COMBO_HORAS.getSelectedItem()), Integer.parseInt(""+COMBO_MINUTOS.getSelectedItem()), 0, Cronometro.REGRESSIVA);
             contagem.cronometro();
             /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
             Teste.marca_tempo(""+COMBO_HORAS.getSelectedItem()+":"+COMBO_MINUTOS.getSelectedItem()+":00");  
             LABEL_TESTE.setText("INICIO - "+Teste.horario_do_inicio+" | "+"FIM - "+Teste.horario_do_fim);
+            String fim = Teste.horario_do_fim;
             /*----------------------------------------------------------------*/
             /*ZERA AS VARIAVEIS QUE MOSTRAM INICIO E FIM DOS HORARIOS*/
             Teste.horario_do_inicio = "";
@@ -190,11 +246,44 @@ public class Tela extends javax.swing.JFrame {
             Teste.minutos_finais = "";
             Teste.horas_finais = "";
             /*----------------------------------------------------------------*/
+            timer2 = new Timer(1000, (ActionEvent e) -> {
+                LABEL_TEMPO_RESTANTE.setText("Tempo Restante | "+contagem.getTime());   
+                Metodos.tempo_decorrido(""+COMBO_HORAS.getSelectedItem(), ""+COMBO_MINUTOS.getSelectedItem());
+                LABEL_TEMPO_DECORRIDO.setText("Tempo Decorrido | "+Metodos.cronometro_string);
+                DecimalFormat deci = new DecimalFormat("0.00");
+                LABEL_PORCENT_PROGRESSIVA.setText(deci.format(Metodos.porcentagem)+"%");//""+Metodos.porcentagem
+                LABEL_PORCENT_REGRESSIVA.setText(deci.format(Metodos.porcentagem_regressiva)+"%");//""+Metodos.porcentagem
+                /*------------------------------------------------------------*/
+                /*PROCESSA OS VALORES PARA A BARRA PROGRESSIVA*/
+                DecimalFormat deci2 = new DecimalFormat("0");
+                String vp = ""+deci2.format(Metodos.porcentagem);
+                int vpi = Integer.parseInt(""+vp);
+                BARRA_PROGRESSIVA.setValue(vpi);
+                /*------------------------------------------------------------*/
+                /*------------------------------------------------------------*/
+                /*PROCESSA OS VALORES PARA A BARRA PROGRESSIVA*/
+                DecimalFormat deci3 = new DecimalFormat("0");
+                String vp2 = ""+deci3.format(Metodos.porcentagem_regressiva);
+                int vpi2 = Integer.parseInt(""+vp2);
+                BARRA_REGRESSIVA.setValue(vpi2);
+                /*------------------------------------------------------------*/
+                if(LABEL_HORA_ATUAL.getText().equals("Hora Atual | "+fim)){      
+                    Metodos.contador_porcentagem = 0;//ZERA A PORCENTAGEM
+                    BTN_PARARActionPerformed(null);
+                    BTN_PARAR.setEnabled(false); 
+                    JOptionPane.showMessageDialog(null,"Fim do tempo");
+                }
+            });
+        
+        timer2.start();
         }
     }//GEN-LAST:event_BTN_INICIARActionPerformed
 
     private void BTN_PARARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PARARActionPerformed
         // TODO add your handling code here:
+        timer2.stop();    
+        /*ZERA AS INFORMACOES*/
+        Metodos.zerador();
     }//GEN-LAST:event_BTN_PARARActionPerformed
 
     /**
@@ -227,12 +316,18 @@ public class Tela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_INICIAR;
-    private javax.swing.JButton BTN_PARAR;
-    private javax.swing.JComboBox<String> COMBO_HORAS;
-    private javax.swing.JComboBox<String> COMBO_MINUTOS;
-    private javax.swing.JLabel LABEL_HORA_ATUAL;
-    private javax.swing.JLabel LABEL_TESTE;
+    public static javax.swing.JProgressBar BARRA_PROGRESSIVA;
+    public static javax.swing.JProgressBar BARRA_REGRESSIVA;
+    public static javax.swing.JButton BTN_INICIAR;
+    public static javax.swing.JButton BTN_PARAR;
+    public static javax.swing.JComboBox<String> COMBO_HORAS;
+    public static javax.swing.JComboBox<String> COMBO_MINUTOS;
+    public static javax.swing.JLabel LABEL_HORA_ATUAL;
+    public static javax.swing.JLabel LABEL_PORCENT_PROGRESSIVA;
+    public static javax.swing.JLabel LABEL_PORCENT_REGRESSIVA;
+    public static javax.swing.JLabel LABEL_TEMPO_DECORRIDO;
+    public static javax.swing.JLabel LABEL_TEMPO_RESTANTE;
+    public static javax.swing.JLabel LABEL_TESTE;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
