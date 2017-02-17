@@ -5,6 +5,11 @@
  */
 package CODIGOS;
 
+import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
+
 /**
  *
  * @author irmoura
@@ -36,9 +41,16 @@ public class Tela extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clock");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
+        jCombo_horas.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jCombo_horas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
 
+        jLabel_hora_atual.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel_hora_atual.setText("00:00:00");
 
         jDesktopPane1.setLayer(jCombo_horas, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -53,12 +65,12 @@ public class Tela extends javax.swing.JFrame {
                 .addComponent(jCombo_horas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_hora_atual)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
+                .addContainerGap(233, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCombo_horas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_hora_atual))
@@ -88,6 +100,11 @@ public class Tela extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        new Thread_HoraAtual().Run();
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -104,22 +121,16 @@ public class Tela extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Tela().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Tela().setVisible(true);
         });
     }
 
@@ -131,4 +142,14 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
+    public class Thread_HoraAtual extends Thread{
+        public void Run(){
+            Timer timer = new Timer(0, (ActionEvent e) -> {
+                SimpleDateFormat hora_completa = new SimpleDateFormat("hh:mm:ss:S");
+                jLabel_hora_atual.setText(""+hora_completa.format(new Date()));
+            });
+
+            timer.start();
+        }
+    }
 }
