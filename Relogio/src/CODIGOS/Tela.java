@@ -6,11 +6,17 @@
 package CODIGOS;
 
 import java.awt.event.ActionEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 /**
  *
@@ -26,6 +32,20 @@ public class Tela extends javax.swing.JFrame {
      */
     public Tela() {
         initComponents();
+    }
+    
+    public static void play(String nomeDoAudio){
+        try {
+            FileInputStream fis = new FileInputStream("C:\\CLOCK\\"+nomeDoAudio+".mp3");
+            try {
+                Player playMP3 = new Player(fis);
+                playMP3.play();
+            } catch (JavaLayerException ex) {
+                Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -270,7 +290,8 @@ public class Tela extends javax.swing.JFrame {
                 if(LABEL_HORA_ATUAL.getText().equals("Hora Atual | "+fim)){      
                     Metodos.contador_porcentagem = 0;//ZERA A PORCENTAGEM
                     BTN_PARARActionPerformed(null);
-                    BTN_PARAR.setEnabled(false); 
+                    BTN_PARAR.setEnabled(false);
+                    play("apitodefutebol");
                     JOptionPane.showMessageDialog(null,"Fim do tempo");
                 }
             });
